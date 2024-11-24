@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactez-nous</title>
+    <title>CONTACTEZ-NOUS</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,32 +26,10 @@
         }
 
         h1 {
-            font-size: 28px;
+            font-size: 20px;
             text-align: center;
             color: #333333;
             margin-bottom: 20px;
-            font-weight: bold;
-            position: relative;
-            animation: slideIn 2s ease-out;
-        }
-
-        /* Animation pour l'apparition du titre */
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        h1:hover {
-            color: #007bff;
-            text-shadow: 2px 2px 5px rgba(0, 123, 255, 0.5);
-            transform: scale(1.1) rotate(5deg);
-            transition: all 0.01s ease;
         }
 
         .RADIO22 {
@@ -117,19 +95,31 @@
         .button:hover {
             background-color: #0056b3;
         }
-
+        h1:hover {
+            color: #007bff;
+            text-shadow: 2px 2px 5px rgba(0, 123, 255, 0.5);
+            transform: scale(1.1) rotate(5deg);
+            transition: all 0.01s ease;
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>CONTACTEZ-NOUS</h1>
         <form id="messageForm">
-            <textarea id="message" name="message" rows="4" cols="30" placeholder="Écrivez votre message ici..." required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; resize: none;"></textarea>
+            <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                cols="30" 
+                placeholder="Écrivez votre message ici..." 
+                required
+                style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; resize: none;">
+            </textarea>
 
             <div class="RADIO22">
                 <div class="radio-item">
-                    <input type="radio" id="IBRAHIM" name="phone" value="+212662781207">
+                    <input type="radio" id="IBRAHIM" name="phone" value="+212663715065">
                     <label for="IBRAHIM">IBRAHIM</label>
                 </div>
                 <div class="radio-item">
@@ -137,20 +127,34 @@
                     <label for="RACHID">RACHID</label>
                 </div>
                 <div class="radio-item">
-                    <input type="radio" id="HICHAM" name="phone" value="+212666043724">
+                    <input type="radio" id="HICHAM" name="phone" value="+212662781207">
                     <label for="HICHAM">HICHAM</label>
                 </div>
             </div>
-            
-            <button type="button" class="button" onclick="openWhatsAppChoice()">Envoyer</button>
+
+            <button class="button" type="submit">Envoyer à WhatsApp</button>
         </form>
     </div>
 
     <script>
-        function openWhatsAppChoice() {
-            alert("This is where the choice for WhatsApp or WhatsApp Business would appear.");
-        }
-    </script>
+        const form = document.getElementById("messageForm");
 
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const message = document.getElementById("message").value.trim();
+            const selectedRadio = document.querySelector('input[name="phone"]:checked');
+
+            if (!message || !selectedRadio) {
+                alert("Veuillez saisir le message et choisir un destinataire.");
+                return;
+            }
+            const phoneNumber = selectedRadio.value; 
+            const encodedMessage = encodeURIComponent(message); 
+           
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, "_blank");
+        });
+    </script>
 </body>
 </html>

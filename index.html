@@ -141,7 +141,6 @@
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-
             const message = document.getElementById("message").value.trim();
             const selectedRadio = document.querySelector('input[name="phone"]:checked');
 
@@ -149,14 +148,9 @@
                 alert("Veuillez saisir le message et choisir un destinataire.");
                 return;
             }
-
             const phoneNumber = selectedRadio.value; 
             const encodedMessage = encodeURIComponent(message); 
-
-           
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-            
             window.open(whatsappUrl, "_blank");
         });
     </script>
